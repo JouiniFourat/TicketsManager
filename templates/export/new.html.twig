@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %}New Export{% endblock %}
+{% block body %}
+<body>
+<div class="sidenav">
+    <a href="{{ path('ticket_index') }}">Tickets</a>
+    <a href="{{ path('project_index') }}">Projects</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('export_new') }}">Export</a>
+        <a href="{{ path('user_index') }}">Users</a>
+    {% endif %}
+        <a href="{{ path('export_index') }}">History</a>
+    <a href="{{ path('logout') }}">Logout</a>
+</div>
+<div class="main">
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#switcher").click(function() {
+                if ( $("#switcher").is(':checked')) {
+                    $("input.form-check-input[type=checkbox]").prop('checked', false);
+                } else {
+                    $("input.form-check-input[type=checkbox]").prop('checked', true);
+                }
+            });
+        });
+    </script>
+
+    <input type="checkbox" id="switcher">Select/Unselect All
+    <h1>Create new Export</h1>
+    {{ include('export/_form.html.twig') }}
+    <a href="{{ path('export_index') }}">back to list</a>
+</div>
+{% endblock %}

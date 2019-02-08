@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Export index{% endblock %}
+
+{% block body %}
+<body>
+<div class="sidenav">
+    <a href="{{ path('ticket_index') }}">Tickets</a>
+    <a href="{{ path('project_index') }}">Projects</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('user_index') }}">Users</a>
+        <a href="{{ path('export_new') }}">Export</a>
+    {% endif %}
+        <a href="{{ path('export_index') }}">History</a>
+    <a href="{{ path('logout') }}">Logout</a>
+</div>
+<div class="main">
+    <h1>Export index</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>CreationDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for export in exports %}
+            <tr>
+                <td>{{ export.id }}</td>
+                <td>{{ export.name }}</td>
+                <td>{{ export.creationDate ? export.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('export_show', {'id': export.id}) }}">show</a>
+                    <a href="{{ path('download_csv', {'id': export.id}) }}">CSV</a>
+                    <a href="{{ path('download_pdf', {'id': export.id}) }}">PDF</a>
+                    <a href="{{ path('download_word', {'id': export.id}) }}">Word</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('export_new') }}">Create new</a>
+    </div>
+{% endblock %}

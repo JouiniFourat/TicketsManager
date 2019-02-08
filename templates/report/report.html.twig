@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+    <head xmlns="http://www.w3.org/1999/html">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block title %}New Report{% endblock %}
+        {% block script %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% endblock %}
+    </head>
+{% endblock %}
+{% block body %}
+    <body>
+<div class="sidenav">
+    <a href="{{ path('ticket_index') }}">Tickets</a>
+    <a href="{{ path('project_index') }}">Projects</a>
+    <a href="{{ path('user_index') }}">Users</a>
+    <a href="{{ path('export_new') }}">Export</a>
+    <a href="{{ path('export_index') }}">History</a>
+    <a href="{{ path('logout') }}">Logout</a>
+</div>
+<div class="main">
+    <h1>New Report</h1>
+
+    <div class="form-group">
+        <form name="report" method="post" action="{{ path('create_report') }}">
+            <input type="text" name="expname" value="{{ name }}" placeholder="{{ name }}">
+            {% for key, project in projects %}
+                <h1>{{ key }}</h1>
+                <textarea rows="4" cols="100" name="{{ key }}" class=".form-control">{{ project }}</textarea>
+                <hr>
+            {% endfor %}
+            <br>
+            <input type="submit" value="Generate Report" class="btn btn-default"/>
+        </form>
+    </div>
+    <a href="{{ path('export_index') }}" class="btn btn-outline-primary">back to list</a>
+    <a href="{{ path('ticket_index') }}" class="btn btn-outline-primary">Main Menu</a>
+</div>
+{% endblock %}

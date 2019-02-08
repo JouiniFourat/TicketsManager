@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticket{% endblock %}
+
+{% block body %}
+<div class="sidenav">
+    <a href="{{ path('ticket_index') }}">Tickets</a>
+    <a href="{{ path('project_index') }}">Projects</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('export_new') }}">Export</a>
+        <a href="{{ path('user_index') }}">Users</a>
+    {% endif %}
+        <a href="{{ path('export_index') }}">History</a>
+    <a href="{{ path('logout') }}">Logout</a>
+</div>
+<div class="main">
+    <h1>Ticket No: {{ ticket.id }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket.id }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ ticket.content }}</td>
+            </tr>
+            <tr>
+                <th>CreationDate</th>
+                <td>{{ ticket.creationDate ? ticket.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LastUpdate</th>
+                <td>{{ ticket.lastUpdate ? ticket.lastUpdate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Stat</th>
+                <td>{{ ticket.stat }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('ticket_index') }}" class="btn btn-outline-primary">back to list</a>
+    </div>
+{% endblock %}

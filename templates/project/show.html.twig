@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+    <div class="sidenav">
+        <a href="{{ path('ticket_index') }}">Tickets</a>
+        <a href="{{ path('project_index') }}">Projects</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('export_new') }}">Export</a>
+            <a href="{{ path('user_index') }}">Users</a>
+        {% endif %}
+            <a href="{{ path('export_index') }}">History</a>
+        <a href="{{ path('logout') }}">Logout</a>
+    </div>
+    <div class="main">
+        <h1>Project No {{ project.id }}</h1>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ project.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ project.nom }}</td>
+            </tr>
+            <tr>
+                <th>DateCreation</th>
+                <td>{{ project.dateCreation ? project.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>LastUpdate</th>
+                <td>{{ project.lastUpdate ? project.lastUpdate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('project_index') }}" class="btn btn-outline-primary">back to list</a><br>
+    </div>
+{% endblock %}

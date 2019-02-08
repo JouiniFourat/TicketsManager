@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+<div class="sidenav">
+    <a href="{{ path('ticket_index') }}">Tickets</a>
+    <a href="{{ path('project_index') }}">Projects</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('export_new') }}">Export</a>
+    {% endif %}
+    <a href="{{ path('export_index') }}">History</a>
+    <a href="{{ path('logout') }}">Logout</a>
+</div>
+<div class="main">
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_index') }}">back to list</a>
+
+    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+</div>
+{% endblock %}

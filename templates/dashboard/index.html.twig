@@ -1,0 +1,25 @@
+{% block head %}
+    {% block stylesheets %}
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Numans');
+        html,body {
+            background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    {% endblock %}
+{% endblock %}
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <br><br><br>
+        <p align="center">
+            <a class="btn btn-primary btn-lg btn-block" href="{{ path('ticket_index') }}">Tickets</a><br>
+            <a class="btn btn-primary btn-lg btn-block" href="{{ path('project_index') }}">Projects</a><br>
+            <a class="btn btn-secondary btn-lg btn-block" href="{{ path('logout') }}">Logout</a>
+        </p>
+    {% endif %}
+{% endblock %}
